@@ -18,8 +18,8 @@ def getQuote():
     data = response.json()
     response_message = {
         "response": {
-            "text": data.get("quoteText") + "\n\n " + data.get("quoteAuthor") if data.get("quoteAuthor") != "" else "",
-            "tts": data.get("quoteText") + "\n\n " + data.get("quoteAuthor") if data.get("quoteAuthor") != "" else "",
+            "text": data.get("quoteText") + ("\n\n " + data.get("quoteAuthor") if data.get("quoteAuthor") != "" else ""),
+            "tts": data.get("quoteText") + ("\n\n " + data.get("quoteAuthor") if data.get("quoteAuthor") != "" else ""),
             "end_session": False
         },
         "session": request_data.get("session"),
