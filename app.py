@@ -7,26 +7,26 @@ import re
 
 app = Flask(__name__)
 
-@app.route('/webhook', methods=['POST'])
-def webhook():
-    print("\nrequest.data={}".format(request.data))
-    return request.data
-# @app.route("/webhook", methods=['POST', 'GET'])
-# def getQuote():
-#     request_data = request.json
-#     response = requests.post("http://api.forismatic.com/api/1.0/", data={'method': 'getQuote', 'format': 'json', 'key': randrange(1000000)})
-#     data = response.json()
-#     response_message = {
-#         "response": {
-#             "text": data.get("quoteText") + "\n\n " + data.get("quoteAuthor") if data.get("quoteAuthor") != "" else "",
-#             "tts": data.get("quoteText") + "\n\n " + data.get("quoteAuthor") if data.get("quoteAuthor") != "" else "",
-#             "end_session": False
-#         },
-#         "session": request_data.get("session"),
-#         "version": request_data.get("version")
-#     }
-#     print(response_message);
-#     return response_message;
+# @app.route('/webhook', methods=['POST'])
+# def webhook():
+#     print("\nrequest.data={}".format(request.data))
+#     return request.data
+@app.route("/webhook", methods=['POST', 'GET'])
+def getQuote():
+    request_data = request.json
+    response = requests.post("http://api.forismatic.com/api/1.0/", data={'method': 'getQuote', 'format': 'json', 'key': randrange(1000000)})
+    data = response.json()
+    response_message = {
+        "response": {
+            "text": data.get("quoteText") + "\n\n " + data.get("quoteAuthor") if data.get("quoteAuthor") != "" else "",
+            "tts": data.get("quoteText") + "\n\n " + data.get("quoteAuthor") if data.get("quoteAuthor") != "" else "",
+            "end_session": False
+        },
+        "session": request_data.get("session"),
+        "version": request_data.get("version")
+    }
+    print(response_message);
+    return response_message;
 
 @app.route("/")
 def home():
